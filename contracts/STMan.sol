@@ -8,7 +8,7 @@ import "openzeppelin-solidity/contracts/access/Ownable.sol";
 import "openzeppelin-solidity/contracts/utils/math/SafeMath.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 
-contract KingSpeed is ERC20("KingSpeed", "KSC"), ERC20Burnable ,
+contract StickManToken is ERC20("StickMan Token", "STMan"), ERC20Burnable ,
          Ownable {
     using SafeMath for uint256;
     

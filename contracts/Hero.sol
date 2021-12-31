@@ -31,4 +31,15 @@ contract Hero is ERC721Enumerable, Ownable {
         _tokenIdTracker.increment();
         return token_id;
     }
+
+    function listTokenIds(address owner)external view returns (uint256[] memory tokenIds){
+        uint balance = balanceOf(owner);
+        uint256[] memory ids = new uint256[](balance);
+       
+        for( uint i = 0;i<balance;i++)
+        {
+            ids[i]=tokenOfOwnerByIndex(owner,i);
+        }
+        return (ids);
+    } 
 }
