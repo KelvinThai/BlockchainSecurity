@@ -5,8 +5,6 @@ import "openzeppelin-solidity/contracts/utils/Context.sol";
 import "openzeppelin-solidity/contracts/utils/Counters.sol";
 import "openzeppelin-solidity/contracts/access/Ownable.sol";
 import "openzeppelin-solidity/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-import "openzeppelin-solidity/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "openzeppelin-solidity/contracts/token/ERC20/ERC20.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/utils/SafeERC20.sol";
 import "openzeppelin-solidity/contracts/utils/math/SafeMath.sol";
 
@@ -25,9 +23,10 @@ contract Hero is ERC721Enumerable, Ownable {
         return "https://heros.stickman.io/";
     }
 
-    function mint(address to) external onlyOwner returns (uint256) {
+    function mint(address _to) external onlyOwner returns (uint256) {
+        require(balanceOf(_to)==0,"One address only have one Hero");
         uint256 token_id = _tokenIdTracker.current();
-        _mint(to, token_id);
+        _mint(_to, token_id);
         _tokenIdTracker.increment();
         return token_id;
     }
@@ -42,4 +41,25 @@ contract Hero is ERC721Enumerable, Ownable {
         }
         return (ids);
     } 
+    function transferFrom(
+        address from,
+        address to,
+        uint256 tokenId
+    ) public virtual override {
+        require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
+        require(balanceOf(to)<=1,"One address only have one Hero");
+        _transfer(from, to, tokenId);
+    }
+
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 tokenId,
+        bytes memory _data
+    ) public virtual override {
+        require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: transfer caller is not owner nor approved");
+        require(balanceOf(to)==0,"One address only have one Hero");
+        _safeTransfer(from, to, tokenId, _data);
+    }
+    
 }
