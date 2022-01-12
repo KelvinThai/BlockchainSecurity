@@ -1,9 +1,5 @@
 {
   "dev": {},
-  "bsctest": {
-    "Hero": "0x05B1E9aA7d4f9BBa68E5BC3d07bc920b4A969e5C",
-    "STMan": "0x05612c385C67E6014efD1b1bf389493f6E55bE74",
-    "Marketplace": "0x018697Fed660887eB8cc2585F00d3E4a24C77a99"
-  },
+  "bsctest": {},
   "main": {}
 }

@@ -1,5 +1,3 @@
-# Smartcontract project for StickMan Game
-
 # Requirements
  -  NodeJS
  -  Yarn
